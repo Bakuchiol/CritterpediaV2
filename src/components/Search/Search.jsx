@@ -1,16 +1,19 @@
 import React, { useState } from 'react'
 
-function Search({setSearchTerm}) {
+function Search({setSearchTerm, getData, category}) {
     const [searchQuery, setSearchQuery] = useState("")
-    const handleChange = (e) => {
+    const handleChange = async (e) => {
+        await getData(category)
         setSearchQuery(e.target.value)
+        setSearchTerm(searchQuery)
     }
     const handleSubmit = (e) => {
+        e.preventDefault()
         setSearchTerm(searchQuery)
     }
   return (
-    <form>
-        <input type="text" name="search" id="search" onChange={handleChange} onSubmit={handleSubmit} />
+    <form onSubmit={handleSubmit}>
+        <input type="text" name="search" id="search" onChange={handleChange}  />
         <input type="submit" value="search" />
     </form>
   )
