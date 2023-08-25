@@ -11,6 +11,7 @@ function Main() {
     const [category, setCategory] = useState('all')
     const [data,setData] = useState([])
 
+    // TODO: LYNETTE use this function in the Gallery Page
     const getData = async (category) => {
         try {
             const res = await axios.get(`https://critterpedia-backend-teal.vercel.app/${category}`)
@@ -36,7 +37,17 @@ function Main() {
     //useEffect#2
     useEffect(() => {
         try {
-            let filteredData = data.filter(critter => critter.name.includes(searchTerm))
+            // if (searchTerm === "") {
+            //     getData(category)
+            //     return
+            // }
+
+            if (!data.length) {
+                console.log('nothing to filter')
+                return
+            } else console.log('something to filter', searchTerm)
+
+            let filteredData = data.filter((critter) => critter.Name.toLowerCase().includes(searchTerm))
             setData(filteredData)
         } catch (err) {
             console.error("Main.jsx: (useEffect#2) Couldn't filter data using searchTerm", err)
@@ -45,7 +56,7 @@ function Main() {
 
     return (
         <div className="main">
-            <Search setSearchTerm={setSearchTerm} />
+            <Search setSearchTerm={setSearchTerm} getData={getData} category={category} />
             <Categories setCategory={setCategory} />
             <Grid data={data} />
         </div>
