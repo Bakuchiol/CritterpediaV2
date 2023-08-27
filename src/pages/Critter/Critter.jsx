@@ -23,8 +23,8 @@ const Critter = () => {
     })
   }, []) // for testing purposes
   
-  console.log( currentCritter )
-  console.log( allCritters )
+  console.log( 'CURRENT CRITTER', currentCritter )
+  // console.log( allCritters )
   
   // to hold previous and next critter indicies
   let previous, next
@@ -32,7 +32,7 @@ const Critter = () => {
   const setPreviousAndNext = () => {
     // need index of current
     const currentCritterIndex = allCritters?.indexOf( currentCritter )
-    console.log( 'CURRENT CRITTER INDEX', currentCritterIndex)
+    // console.log( 'CURRENT CRITTER INDEX', currentCritterIndex)
     
     // account for current being first or last index
     if( currentCritterIndex === 0 ){
@@ -45,7 +45,7 @@ const Critter = () => {
       previous = currentCritterIndex -1
       next = currentCritterIndex + 1
     }
-    console.log(previous, next)
+    // console.log('PREVIOUS NEXT', previous, next)
   }
   setPreviousAndNext()
   
@@ -60,7 +60,7 @@ const Critter = () => {
     })
     return formatted.join(' ') // words with each first letter capital
   }
-  console.log( formatWords('this is a test'))
+  // console.log( formatWords('this is a test'))
 
   // for handling arrow clicks
   const switchCurrentCritter = ( index ) => {
